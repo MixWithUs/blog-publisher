@@ -29,18 +29,20 @@ defaults:
 jobs:
   # Deployment job
   deploy:
+    env:
+      GITHUB_PAGES: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-#      - name: Setup Pages
-#        id: pages
-#        uses: actions/configure-pages@v5
+      #      - name: Setup Pages
+      #        id: pages
+      #        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: $GITHUB_WORKSPACE/public
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
